@@ -7,16 +7,29 @@ router.get('/', function(req, res, next) {
   res.json(db.findUsers());
 });
 
+router.get('/:id', (request, response) => {
+  const id = request.params.id;
+  response.json(db.findUser(id));
+})
+
 router.post('/', (request, response) => {
-  db.insertUser(request.body);
-  response.status(201).json(users);
+  const user = db.insertUser(request.body);
+  response.status(201).json(user);
 })
 
 router.put('/:id',(request, response) => {
   const id = request.params.id;
-  const user = db.updateUser(id, request.body);
+  const user = db.updateUser(id, request.body, true);
   response.status(200).json(user);
 })
+
+router.patch('/:id',(request, response) => {
+  const id = request.params.id;
+  const user = db.updateUser(id, request.body, false);
+  response.status(200).json(user);
+})
+
+
 
 router.delete('/:id', (request, response) => {
   const id = request.params.id;
