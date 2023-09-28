@@ -3,13 +3,11 @@ const Joi = require("joi");
 module.exports = Joi.object({
     nome: Joi.string()
              .min(5)
-             .max(150)
-             .required(),
+             .max(150),
 
     idade: Joi.number()
               .integer(5)
-              .min(18)
-              .required(),
+              .min(18),
     
     uf: Joi.string()
             .length(2),
